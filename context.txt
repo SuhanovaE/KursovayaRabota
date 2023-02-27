@@ -1,0 +1,32 @@
+using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    
+    public partial class JewelryShopEntities : DbContext
+    {
+        private static JewelryShopEntities _context;
+        public JewelryShopEntities()
+            : base("name=JewelryShopEntities")
+        {
+        }
+
+        public static JewelryShopEntities GetContext() //метод для обработки поля
+        {
+            if (_context == null)
+                _context = new JewelryShopEntities();
+            return _context;
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
+    
+        public virtual DbSet<Clients> Clients { get; set; }
+        public virtual DbSet<Discount> Discount { get; set; }
+        public virtual DbSet<Jewel> Jewel { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<Service> Service { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Type> Type { get; set; }
+    }
